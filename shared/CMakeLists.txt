@@ -3,6 +3,7 @@ add_library(cppmessenger_shared
     src/logging/logger.cpp
     src/config/config.cpp
     src/serialization/serializer.cpp
+    src/network/connection.cpp
 )
 
 target_include_directories(cppmessenger_shared
