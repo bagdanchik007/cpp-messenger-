@@ -1,1 +1,9 @@
-# Placeholder; configure clang-tidy checks later.
+Checks: >-
+  -*,
+  bugprone-*,
+  performance-*,
+  portability-*,
+  readability-*
+WarningsAsErrors: ""
+HeaderFilterRegex: ".*"
+FormatStyle: file
