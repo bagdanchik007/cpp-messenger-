@@ -1,0 +1,1 @@
+# CppMessenger shared library.
