@@ -1,5 +1,6 @@
 add_library(cppmessenger_shared
     src/shared.cpp
+    src/logging/logger.cpp
 )
 
 target_include_directories(cppmessenger_shared
