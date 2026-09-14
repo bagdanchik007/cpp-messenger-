@@ -11,3 +11,5 @@ target_compile_features(cppmessenger_server
     PRIVATE
         cxx_std_20
 )
+
+cppmessenger_enable_warnings(cppmessenger_server)

@@ -12,7 +12,7 @@ target_compile_features(cppmessenger_tests
         cxx_std_20
 )
 
-enable_testing()
+cppmessenger_enable_warnings(cppmessenger_tests)
 
 add_test(
     NAME cppmessenger_tests
