@@ -1,1 +1,0 @@
-// CppMessenger client entry point.
