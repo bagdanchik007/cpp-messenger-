@@ -1,0 +1,1 @@
+#include <cppmessenger/shared.hpp>

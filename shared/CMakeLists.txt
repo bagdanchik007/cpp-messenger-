@@ -1,5 +1,3 @@
-# CppMessenger shared library.
-
 add_library(cppmessenger_shared
     src/shared.cpp
 )
