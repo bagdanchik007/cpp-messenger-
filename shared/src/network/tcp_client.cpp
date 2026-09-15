@@ -10,6 +10,8 @@ public:
     bool connect(const Endpoint& endpoint)
     {
         if (endpoint.host.empty() || endpoint.port == 0) {
+            connected_ = false;
+            endpoint_ = {};
             return false;
         }
 
