@@ -6,6 +6,7 @@ add_library(cppmessenger_shared
     src/network/connection.cpp
     src/network/tcp_server.cpp
     src/network/tcp_client.cpp
+    src/protocol/packet.cpp
 )
 
 target_include_directories(cppmessenger_shared
