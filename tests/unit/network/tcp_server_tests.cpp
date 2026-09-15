@@ -4,8 +4,17 @@
 
 int main()
 {
-    cppmessenger::network::TcpServer server(8080);  
+    cppmessenger::network::TcpServer server(8080);
 
     assert(!server.is_running());
+
+    server.start();
+
+    assert(server.is_running());
+
+    server.stop();
+
+    assert(!server.is_running());
+
     return 0;
 }
