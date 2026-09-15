@@ -1,4 +1,4 @@
-#include  <cassert>
+#include <cassert>
 
 #include <cppmessenger/network/tcp_client.hpp>
 
@@ -11,8 +11,11 @@ int main()
 
     assert(!client.is_connected());
 
-    const Endpoint endpoint{"127.0.0.1", 8080};
-    
+    const Endpoint endpoint{
+        "127.0.0.1",
+        8080
+    };
+
     const bool connected = client.connect(endpoint);
 
     assert(connected);
@@ -24,9 +27,21 @@ int main()
 
     assert(!client.is_connected());
 
-    const Endpoint invalid_endpoint{"invalid_host", 8080};
+    const Endpoint invalid_endpoint{
+        "",
+        8080
+    };
+
     assert(!client.connect(invalid_endpoint));
     assert(!client.is_connected());
-    
+
+    const Endpoint invalid_port{
+        "127.0.0.1",
+        0
+    };
+
+    assert(!client.connect(invalid_port));
+    assert(!client.is_connected());
+
     return 0;
 }
