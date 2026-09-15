@@ -1,6 +1,11 @@
 add_executable(cppmessenger_server
     src/main.cpp
-    scr/network/tcp_acceptor.cpp
+    src/network/tcp_acceptor.cpp
+)
+
+target_include_directories(cppmessenger_server
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
 target_link_libraries(cppmessenger_server
