@@ -1,6 +1,7 @@
 add_executable(cppmessenger_tests
     unit/shared/shared_tests.cpp
     unit/network/tcp_server_tests.cpp
+    unit/network/tcp_client_tests.cpp
 )
 
 target_link_libraries(cppmessenger_tests
