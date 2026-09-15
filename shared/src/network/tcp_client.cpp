@@ -1,6 +1,7 @@
 #include <cppmessenger/network/tcp_client.hpp>
 
 #include <memory>
+#include <utility>
 
 namespace cppmessenger::network {
 
@@ -12,7 +13,9 @@ public:
             return false;
         }
 
+        endpoint_ = endpoint;
         connected_ = true;
+
         return true;
     }
 
@@ -26,7 +29,13 @@ public:
         return connected_;
     }
 
+    [[nodiscard]] const Endpoint& endpoint() const noexcept
+    {
+        return endpoint_;
+    }
+
 private:
+    Endpoint endpoint_;
     bool connected_ = false;
 };
 
@@ -54,6 +63,11 @@ void TcpClient::disconnect() noexcept
 bool TcpClient::is_connected() const noexcept
 {
     return impl_->is_connected();
+}
+
+const Endpoint& TcpClient::endpoint() const noexcept
+{
+    return impl_->endpoint();
 }
 
 } // namespace cppmessenger::network
