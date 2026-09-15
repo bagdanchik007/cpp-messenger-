@@ -4,6 +4,7 @@ add_library(cppmessenger_shared
     src/config/config.cpp
     src/serialization/serializer.cpp
     src/network/connection.cpp
+    src/network/tcp_server.cpp
 )
 
 target_include_directories(cppmessenger_shared
