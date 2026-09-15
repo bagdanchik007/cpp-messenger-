@@ -21,6 +21,7 @@ public:
     void disconnect() noexcept override;
 
     [[nodiscard]] bool is_connected() const noexcept override;
+    [[nodiscard]] ConnectionState state() const noexcept override;
     [[nodiscard]] const Endpoint& endpoint() const noexcept;
 
 private:
