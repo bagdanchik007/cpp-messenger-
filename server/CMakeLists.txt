@@ -1,5 +1,6 @@
 add_executable(cppmessenger_server
     src/main.cpp
+    scr/network/tcp_acceptor.cpp
 )
 
 target_link_libraries(cppmessenger_server
