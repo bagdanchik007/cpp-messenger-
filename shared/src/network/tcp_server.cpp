@@ -56,7 +56,7 @@ void TcpServer::start()
     impl_->start();
 }
 
-void TcpServer::stop()
+void TcpServer::stop() noexcept
 {
     impl_->stop();
 }
