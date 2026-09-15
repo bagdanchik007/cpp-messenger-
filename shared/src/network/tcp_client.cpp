@@ -9,26 +9,42 @@ class TcpClient::Impl {
 public:
     bool connect(const Endpoint& endpoint)
     {
+        if (state_ != ConnectionState::disconnected) {
+            return false;
+        }
+
+        state_ = ConnectionState::connecting;
+
         if (endpoint.host.empty() || endpoint.port == 0) {
-            connected_ = false;
+            state_ = ConnectionState::disconnected;
             endpoint_ = {};
             return false;
         }
 
         endpoint_ = endpoint;
-        connected_ = true;
+        state_ = ConnectionState::connected;
 
         return true;
     }
 
     void disconnect() noexcept
     {
-        connected_ = false;
+        if (state_ == ConnectionState::disconnected) {
+            return;
+        }
+
+        state_ = ConnectionState::disconnecting;
+        state_ = ConnectionState::disconnected;
     }
 
     [[nodiscard]] bool is_connected() const noexcept
     {
-        return connected_;
+        return state_ == ConnectionState::connected;
+    }
+
+    [[nodiscard]] ConnectionState state() const noexcept
+    {
+        return state_;
     }
 
     [[nodiscard]] const Endpoint& endpoint() const noexcept
@@ -38,7 +54,7 @@ public:
 
 private:
     Endpoint endpoint_;
-    bool connected_ = false;
+    ConnectionState state_ = ConnectionState::disconnected;
 };
 
 TcpClient::TcpClient()
@@ -65,6 +81,11 @@ void TcpClient::disconnect() noexcept
 bool TcpClient::is_connected() const noexcept
 {
     return impl_->is_connected();
+}
+
+ConnectionState TcpClient::state() const noexcept
+{
+    return impl_->state();
 }
 
 const Endpoint& TcpClient::endpoint() const noexcept
