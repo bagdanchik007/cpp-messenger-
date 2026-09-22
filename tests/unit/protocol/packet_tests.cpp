@@ -38,5 +38,30 @@ int main()
             encode_result.value());
     assert(decoded_result.has_value());
     assert(decoded_result.value() == original_payload);
+
+    const cppmessenger::protocol::Packet invalid_packet{
+        10, "hello"
+    };
+    const auto invalid_extract_result =
+        cppmessenger::protocol::extract_payload(invalid_packet);
+    
+    assert(!invalid_extract_result.has_value());
+    const std::string invalid_encodeed_packet{
+        '\0',
+        '\0',
+        '\0',
+        '\x06',
+        'h',
+        'e',
+        'l',
+        'l',
+        'o'
+    };  
+
+    const auto invalid_decode_result =
+        cppmessenger::protocol::decode_packet(
+            invalid_encodeed_packet);
+    assert(!invalid_decode_result.has_value());
+    
     return 0;
 }
