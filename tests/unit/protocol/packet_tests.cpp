@@ -10,7 +10,7 @@ int main()
     const std::string payload = "hello";
 
     const auto result =
-        cppmessenger ::protocol::frame_packet(payload);
+        cppmessenger::protocol::frame_packet(payload);
 
     assert(result.has_value());
 
@@ -18,35 +18,47 @@ int main()
 
     assert(packet.payload_size == 5);
     assert(packet.payload == "hello");
-    
-    const cppmessenger::protocol::Packet packet{
-        5, "hello"
+
+    const cppmessenger::protocol::Packet extraction_packet{
+        5,
+        "hello"
     };
 
     const auto extract_result =
-        cppmessenger::protocol::extract_payload(packet);
+        cppmessenger::protocol::extract_payload(
+            extraction_packet);
+
     assert(extract_result.has_value());
-    assert(extract_result.value() == "hello");  
+    assert(extract_result.value() == "hello");
+
     const std::string original_payload =
         "Hello from cpp-messenger";
+
     const auto encode_result =
-        cppmessenger::protocol::encode_packet(original_payload);
+        cppmessenger::protocol::encode_packet(
+            original_payload);
+
     assert(encode_result.has_value());
 
     const auto decoded_result =
         cppmessenger::protocol::decode_packet(
             encode_result.value());
+
     assert(decoded_result.has_value());
     assert(decoded_result.value() == original_payload);
 
     const cppmessenger::protocol::Packet invalid_packet{
-        10, "hello"
+        10,
+        "hello"
     };
+
     const auto invalid_extract_result =
-        cppmessenger::protocol::extract_payload(invalid_packet);
-    
+        cppmessenger::protocol::extract_payload(
+            invalid_packet);
+
     assert(!invalid_extract_result.has_value());
-    const std::string invalid_encodeed_packet{
+
+    const std::string invalid_encoded_packet{
         '\0',
         '\0',
         '\0',
@@ -56,12 +68,13 @@ int main()
         'l',
         'l',
         'o'
-    };  
+    };
 
     const auto invalid_decode_result =
         cppmessenger::protocol::decode_packet(
-            invalid_encodeed_packet);
+            invalid_encoded_packet);
+
     assert(!invalid_decode_result.has_value());
-    
+
     return 0;
 }
