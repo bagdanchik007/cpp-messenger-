@@ -8,6 +8,7 @@ add_library(cppmessenger_shared
     src/network/tcp_client.cpp
     src/protocol/packet.cpp
     src/protocol/packet_encoder.cpp
+    shared/src/protocol/packet_decoder.cpp
 )
 
 target_include_directories(cppmessenger_shared
