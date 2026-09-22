@@ -1,22 +1,31 @@
-#pragma once
+#include <cppmessenger/server/message_dispatcher.hpp>
 
-#include <string>
-#include <unordered_map>
-
-#include <cppmessenger/server/message_handler.hpp>
+#include <stdexcept>
+#include <utility>
 
 namespace cppmessenger::server {
 
-class MessageDispatcher {
-public:
-    using Handler = MessageHandler;
+void MessageDispatcher::register_handler(
+    std::string message_type,
+    Handler handler)
+{
+    if (message_type.empty()) {
+        throw std::invalid_argument(
+            "Message type must not be empty");
+    }
 
-    void register_handler(
-        std::string message_type,
-        Handler handler);
+    if (!handler) {
+        throw std::invalid_argument(
+            "Message handler must be valid");
+    }
 
-private:
-    std::unordered_map<std::string, Handler> handlers_;
-};
+    handlers_[std::move(message_type)] = std::move(handler);
+}
+
+bool MessageDispatcher::has_handler(
+    const std::string& message_type) const noexcept
+{
+    return handlers_.contains(message_type);
+}
 
 } // namespace cppmessenger::server
