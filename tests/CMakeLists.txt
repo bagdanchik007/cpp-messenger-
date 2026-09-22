@@ -82,3 +82,24 @@ add_test(
     NAME cppmessenger_packet_encoder_tests
     COMMAND cppmessenger_packet_encoder_tests
 )
+
+add_executable(cppmessenger_packet_decoder_tests
+    unit/network/packet_decoder_tests.cpp
+)
+
+target_link_libraries(cppmessenger_packet_decoder_tests
+    PRIVATE
+        cppmessenger_shared
+)
+
+target_compile_features(cppmessenger_packet_decoder_tests
+    PRIVATE
+        cxx_std_20
+)
+
+cppmessenger_enable_warnings(cppmessenger_packet_decoder_tests)
+
+add_test(
+    NAME cppmessenger_packet_decoder_tests
+    COMMAND cppmessenger_packet_decoder_tests
+)
