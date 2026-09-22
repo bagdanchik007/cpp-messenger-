@@ -2,6 +2,8 @@
 #include <string>
 
 #include <cppmessenger/protocol/packet.hpp>
+#include <cppmessenger/protocol/packet_decoder.hpp>
+#include <cppmessenger/protocol/packet_encoder.hpp>
 
 int main()
 {
@@ -25,6 +27,16 @@ int main()
         cppmessenger::protocol::extract_payload(packet);
     assert(extract_result.has_value());
     assert(extract_result.value() == "hello");  
-    
+    const std::string original_payload =
+        "Hello from cpp-messenger";
+    const auto encode_result =
+        cppmessenger::protocol::encode_packet(original_payload);
+    assert(encode_result.has_value());
+
+    const auto decoded_result =
+        cppmessenger::protocol::decode_packet(
+            encode_result.value());
+    assert(decoded_result.has_value());
+    assert(decoded_result.value() == original_payload);
     return 0;
 }
