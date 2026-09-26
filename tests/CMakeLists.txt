@@ -156,3 +156,30 @@ add_test(
     NAME cppmessenger_message_dispatcher_tests
     COMMAND cppmessenger_message_dispatcher_tests
 )
+
+add_executable(cppmessenger_client_message_dispatcher_tests
+    unit/client/message_dispatcher_tests.cpp
+    ${CMAKE_SOURCE_DIR}/client/src/message_dispatcher.cpp
+)
+
+target_link_libraries(cppmessenger_client_message_dispatcher_tests
+    PRIVATE
+        cppmessenger_shared
+)
+
+target_include_directories(cppmessenger_client_message_dispatcher_tests
+    PRIVATE
+        ${CMAKE_SOURCE_DIR}/client/include
+)
+
+target_compile_features(cppmessenger_client_message_dispatcher_tests
+    PRIVATE
+        cxx_std_20
+)
+
+cppmessenger_enable_warnings(cppmessenger_client_message_dispatcher_tests)
+
+add_test(
+    NAME cppmessenger_client_message_dispatcher_tests
+    COMMAND cppmessenger_client_message_dispatcher_tests
+)
