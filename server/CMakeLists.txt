@@ -1,6 +1,7 @@
 add_executable(cppmessenger_server
     src/main.cpp
     src/network/tcp_acceptor.cpp
+    src/message_dispatcher.cpp
 )
 
 target_include_directories(cppmessenger_server
