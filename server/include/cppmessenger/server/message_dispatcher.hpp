@@ -18,6 +18,10 @@ public:
     [[nodiscard]] bool has_handler(
         const std::string& message_type) const noexcept;
 
+    [[nodiscard]] std::string dispatch(
+        const std::string& message_type,
+        const std::string& payload) const;
+
 private:
     std::unordered_map<std::string, Handler> handlers_;
 };
