@@ -62,6 +62,8 @@ add_test(
     NAME cppmessenger_tcp_client_tests
     COMMAND cppmessenger_tcp_client_tests
 )
+
+
 add_executable(cppmessenger_packet_encoder_tests
     unit/network/packet_encoder_tests.cpp
 )
@@ -82,6 +84,7 @@ add_test(
     NAME cppmessenger_packet_encoder_tests
     COMMAND cppmessenger_packet_encoder_tests
 )
+
 
 add_executable(cppmessenger_packet_decoder_tests
     unit/network/packet_decoder_tests.cpp
@@ -104,6 +107,7 @@ add_test(
     COMMAND cppmessenger_packet_decoder_tests
 )
 
+
 add_executable(cppmessenger_protocol_tests
     unit/protocol/packet_tests.cpp
 )
@@ -123,4 +127,32 @@ cppmessenger_enable_warnings(cppmessenger_protocol_tests)
 add_test(
     NAME cppmessenger_protocol_tests
     COMMAND cppmessenger_protocol_tests
+)
+
+
+add_executable(cppmessenger_message_dispatcher_tests
+    unit/server/message_dispatcher_tests.cpp
+    ${CMAKE_SOURCE_DIR}/server/src/message_dispatcher.cpp
+)
+
+target_link_libraries(cppmessenger_message_dispatcher_tests
+    PRIVATE
+        cppmessenger_shared
+)
+
+target_include_directories(cppmessenger_message_dispatcher_tests
+    PRIVATE
+        ${CMAKE_SOURCE_DIR}/server/include
+)
+
+target_compile_features(cppmessenger_message_dispatcher_tests
+    PRIVATE
+        cxx_std_20
+)
+
+cppmessenger_enable_warnings(cppmessenger_message_dispatcher_tests)
+
+add_test(
+    NAME cppmessenger_message_dispatcher_tests
+    COMMAND cppmessenger_message_dispatcher_tests
 )
