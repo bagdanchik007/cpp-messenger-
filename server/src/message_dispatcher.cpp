@@ -27,5 +27,18 @@ bool MessageDispatcher::has_handler(
 {
     return handlers_.contains(message_type);
 }
+std::string MessageDispatcher::dispatch(
+    const std::string& message_type,
+    const std::string& payload) const
+{
+    const auto it = handlers_.find(message_type);
+
+    if (it == handlers_.end()) {
+        throw std::invalid_argument(
+            "No message handler registered for message type");
+    }
+
+    return it->second(payload);
+}
 
 } // namespace cppmessenger::server
